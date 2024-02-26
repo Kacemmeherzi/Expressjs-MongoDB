@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 3000;
 const mongoose = require('mongoose') ;
 
 // Define a route
@@ -11,7 +10,6 @@ app.get('/', (req, res) => {
 
 //Connection to the data base with mongoose 
 //then and catch called promise 
-const mongoDBUrl = "mongodb+srv://kacemmeherzi:kacem1920@cluster0.yoteyu8.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(mongoDBUrl)
   .then(() => {
