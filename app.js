@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose') ;
 const dotenv = require('dotenv') ;
+app.use(express.json) ;
 dotenv.config();
 const MONGO_URI = process.env.MONGO_URI  || "mongodb+srv://kacemmeherzi:kacem1920@cluster0.yoteyu8.mongodb.net/?retryWrites=true&w=majority";
  const PORT= process.env.PORT|| 3000 ;
@@ -9,7 +10,7 @@ const MONGO_URI = process.env.MONGO_URI  || "mongodb+srv://kacemmeherzi:kacem192
 app.get('/', (req, res) => {
   res.send('Hello, Express!');
 });
- 
+ // TODO :: login and post model with crud 
 //Connection to the data base with mongoose 
 //then and catch called promise 
 console.log (MONGO_URI)
