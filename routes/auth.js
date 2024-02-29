@@ -5,10 +5,14 @@ const jwt = require('jsonwebtoken') ;
 const router = express.Router() ; 
 
 
-router.post('/registre',async (req, res)=>
+router.post('/register',async (req, res)=>
 {
+    
+
 try {
-    const {username,password}= req.body ;
+    const username = req.body.username 
+    const password = req.body.password 
+    console.log(username,password)
     const user = new User ({username,password})
     await user.save() ;
     res.status(201).send('User created ');
@@ -17,3 +21,20 @@ try {
 }
 
 })
+
+router.post('/login', async(req,res) => {
+    try {
+        const { username, password } = req.body;
+      
+
+     const user =  await User.findOne({username}) ;
+console.log(user.username)
+     if (!user) {res.json("invalid credentials")}
+     res.json("connected").status(200)
+    }catch(error){
+        res.json(error.message).status(403)
+    }
+
+} )
+
+module.exports = router ;
