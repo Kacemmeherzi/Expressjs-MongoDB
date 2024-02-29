@@ -3,13 +3,15 @@ const app = express();
 const mongoose = require('mongoose') ;
 const dotenv = require('dotenv') ;
 app.use(express.json()) ;
+const authcontroller = require("./routes/auth.js");
+const postcontroller  = require("./routes/postcontroller.js") ;
 dotenv.config();
 const MONGO_URI = process.env.MONGO_URI 
  const PORT= process.env.PORT|| 3000 ;
-// Define a route
-app.get('/', (req, res) => {
-  res.send('Hello, Express!');
-});
+
+app.use("/auth",authcontroller) ;
+app.use("/post",postcontroller) ;
+
  // TODO :: login and post model with crud 
 //Connection to the data base with mongoose 
 //then and catch called promise 
