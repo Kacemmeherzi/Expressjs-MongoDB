@@ -7,3 +7,9 @@ router.get('/allposts', async(req,res) => {
    res.json(posts).status(200);
 
 } )
+
+
+
+
+
+module.exports= router ;
