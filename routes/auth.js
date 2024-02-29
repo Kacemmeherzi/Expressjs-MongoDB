@@ -27,10 +27,11 @@ router.post('/login', async(req,res) => {
         const { username, password } = req.body;
       
 
-     const user =  await User.findOne({username}) ;
-console.log(user.username)
-     if (!user) {res.json("invalid credentials")}
-     res.json("connected").status(200)
+     const user =  await User.findOne({username,password})
+        
+     if (!user) {res.json("invalid credentials").status(403)}
+     else {
+     res.json("connected").status(200)}
     }catch(error){
         res.json(error.message).status(403)
     }
