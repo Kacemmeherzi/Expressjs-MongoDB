@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose') ;
 const dotenv = require('dotenv') ;
-app.use(express.json) ;
+app.use(express.json()) ;
 dotenv.config();
-const MONGO_URI = process.env.MONGO_URI  || "mongodb+srv://kacemmeherzi:kacem1920@cluster0.yoteyu8.mongodb.net/?retryWrites=true&w=majority";
+const MONGO_URI = process.env.MONGO_URI 
  const PORT= process.env.PORT|| 3000 ;
 // Define a route
 app.get('/', (req, res) => {
@@ -13,7 +13,6 @@ app.get('/', (req, res) => {
  // TODO :: login and post model with crud 
 //Connection to the data base with mongoose 
 //then and catch called promise 
-console.log (MONGO_URI)
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");

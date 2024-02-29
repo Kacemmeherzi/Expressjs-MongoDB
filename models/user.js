@@ -11,7 +11,8 @@ if ( user.isModified("password")){
     user.password = await bcrypt.hash(user.password) ;
 }
 next();
-const User = mongoose.model ('User',userschema) ;
-module.exports= User ; 
+
 
 })
+const User = mongoose.model ('User',userschema) ;
+module.exports= User ; 
