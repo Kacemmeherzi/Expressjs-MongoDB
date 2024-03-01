@@ -25,26 +25,45 @@ router.get('/:id',async( req ,res) => {
 const postid = req.params.id ;
 var post = await Post.findById(postid)
 if (post!= undefined)
-{res.json(post).status(200)}
+{res.status(200).json(post)}
 
         
     
     }catch(error){
-        res.json(error.message).status(404)
+        res.status(404).json(error.message)
     }
 
 })
 
 router.put("/update/:id", async (req, res)=>{
     try{
-        const {id} = req.params;
-        const {title, body} = req.body;
-        const updatePost = await Post.findByIdAndUpdate(id,{title,body},{new:true});
-        res.send(updatePost);
+        const postid = req.params.id ;
+        const data = req.body;
+
+        const post = await Post.findById(postid);
+        console.log (data)
+        if (post){
+            const updatePost = await Post.findByIdAndUpdate(postid,data,{new:true});
+
+            res.json(updatePost).status(200);}
+            else{res.status(404).json("id not found ...")}
     }catch(error){
         res.status(400).send(error.message);
     }
 })
+router.delete("/delete/:id", async (req, res)=>{
+    try{
+        const id = req.params.id;
+        const post = await Post.findById(id);
+        if (post){
+        const deletedpost = await Post.findByIdAndDelete(id);
+        res.status(200).json(deletedpost);}
+        else{res.status(404).json("id not found")}
+    }catch(error){
+        res.status(400).send("bad request",error.message);
+    }
+})
+
 
 
 
