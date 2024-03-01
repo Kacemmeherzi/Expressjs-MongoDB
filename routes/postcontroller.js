@@ -39,7 +39,7 @@ router.put("/update/:id", async (req, res)=>{
     try{
         const {id} = req.params;
         const {title, body} = req.body;
-        const updatePost = await Post.findByIdAndUpdate(id,{title,body},{new:false});
+        const updatePost = await Post.findByIdAndUpdate(id,{title,body},{new:true});
         res.send(updatePost);
     }catch(error){
         res.status(400).send(error.message);
