@@ -5,12 +5,12 @@ const dotenv = require('dotenv') ;
 app.use(express.json()) ;
 const authcontroller = require("./routes/auth.js");
 const postcontroller  = require("./routes/postcontroller.js") ;
+const jwtmiddleware = require("./jwt/jwtMiddleware.js")
 dotenv.config();
 const MONGO_URI = process.env.MONGO_URI 
  const PORT= process.env.PORT|| 3000 ;
-
 app.use("/auth",authcontroller) ;
-app.use("/post",postcontroller) ;
+app.use("/post",jwtmiddleware,postcontroller) ;
 
  // TODO :: login and post model with crud 
 //Connection to the data base with mongoose 
@@ -28,5 +28,7 @@ mongoose.connect(MONGO_URI)
   });
 
 
-
+app.post  ("/aa",async(req,res)=>{
+  res.send(req.body)
+})
 
