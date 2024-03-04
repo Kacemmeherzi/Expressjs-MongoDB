@@ -22,20 +22,22 @@ try {
 
 })
 
-router.post('/login', async(req,res) => {
+router.post('/login', async (req, res) => {
     try {
-        const { username, password } = req.body;
-      
+const {username,password} = req.body ;
+const user = await User.findOne({username:username});
 
-     const user =  await User.findOne({username})
-        
-     if (!user) {res.json("invalid credentials").status(403)}
-     else {
-     res.json("connected").status(200)}
-    }catch(error){
-        res.json(error.message).status(403)
-    }
+const valid= await  bcrypt.compare(password,user.password) ;
 
-} )
+      if (user&&valid) {
+      const token = jwt.generateToken(user) ;
+       res.status(200)
+      .json({"token":token})
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }})
 
 module.exports = router ;
