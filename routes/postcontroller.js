@@ -14,7 +14,7 @@ router.post('/addpost',async(req ,res) => {
 const {title , body } = req.body ;
     const post = new Post({title,body})
      await post.save() ;
-     res.json('created')
+     res.json({"message": "created", post})
     }catch(error){
         res.json(error.message)
     }
