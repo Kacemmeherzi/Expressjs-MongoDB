@@ -5,7 +5,7 @@ function extract_validate_Token(req, res, next) {
     const authorizationHeader = req.headers.authorization;
   
     if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
-      const token = authorizationHeader.substring(7); // Remove 'Bearer ' prefix
+      const token = authorizationHeader.substring(7); // Remove 'Bearer ' prefix or use split method with ' ' as paramater (space)
       req.token = token;
       console.log(jwt.verifytoken(token))
       const validity = jwt.verifytoken(token);
